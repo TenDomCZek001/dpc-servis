@@ -3,117 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPC Servis | Opravy PC a notebooků</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Servis a oprava PC | Profesionální IT pomoc</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Hladký přechod pro plovoucí okno */
+        .modal {
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-900 text-gray-100 font-sans antialiased">
 
-<header>
-    <div class="container">
-        <h1>DPC Servis</h1>
-        <nav>
-            <a href="#sluzby">Služby</a>
-            <a href="#cenik">Ceník</a>
-            <a href="#kontakt">Kontakt</a>
-        </nav>
-    </div>
-</header>
+    <nav class="backdrop-blur-md bg-gray-900/80 sticky top-0 z-40 border-b border-gray-800 px-6 py-4 flex justify-between items-center">
+        <div class="text-xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
+            PC SERVIS
+        </div>
+        <button onclick="toggleModal()" class="bg-blue-600 hover:bg-blue-500 text-white font-medium px-4 py-2 rounded-lg transition shadow-lg shadow-blue-600/20">
+            Rychlá objednávka
+        </button>
+    </nav>
 
-<section class="hero">
-    <div class="container">
-        <h2>Opravy počítačů a notebooků</h2>
-        <p>Rychle, spolehlivě a za rozumnou cenu.</p>
-        <a href="#kontakt" class="btn">Kontaktovat</a>
-    </div>
-</section>
+    <header class="max-w-6xl mx-auto px-6 py-20 text-center relative">
+        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+            Pomalý počítač? <br>
+            <span class="bg-gradient-to-r from-blue-400 to-teal-400 bg-clip-text text-transparent">Vyřešíme to bleskově.</span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10">
+            Profesionální servis, čištění a softwarová podpora pro vaše PC a notebooky. Rychle, spolehlivě a za rozumnou cenu.
+        </p>
+        <div class="flex justify-center gap-4">
+            <button onclick="toggleModal()" class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-8 py-3 rounded-xl font-semibold shadow-xl shadow-indigo-500/20 transition transform hover:-translate-y-0.5">
+                Objednat opravu
+            </button>
+            <a href="#sluzby" class="bg-gray-800 hover:bg-gray-700 border border-gray-700 px-8 py-3 rounded-xl font-semibold transition">
+                Naše služby
+            </a>
+        </div>
+    </header>
 
-<section id="sluzby" class="services">
-    <div class="container">
-        <h2>Naše služby</h2>
-
-        <div class="cards">
-            <div class="card">
-                <h3>Instalace Windows</h3>
-                <p>Čistá instalace systému a základní nastavení.</p>
+    <section id="sluzby" class="max-w-6xl mx-auto px-6 py-16">
+        <h2 class="text-2xl md:text-3xl font-bold text-center mb-12">Jak vám mohu pomoci?</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-gray-800/50 border border-gray-800 rounded-2xl p-6 hover:border-blue-500/50 transition duration-300">
+                <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-4 text-xl font-bold">🛠️</div>
+                <h3 class="text-xl font-semibold mb-2">Hardwarové opravy</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Výměna prasklých displejů, nefunkčních disků, navýšení RAM a oprava chlazení.</p>
             </div>
-
-            <div class="card">
-                <h3>Odstranění virů</h3>
-                <p>Vyčištění systému a zabezpečení počítače.</p>
+            <div class="bg-gray-800/50 border border-gray-800 rounded-2xl p-6 hover:border-teal-500/50 transition duration-300">
+                <div class="w-12 h-12 bg-teal-500/10 text-teal-400 rounded-xl flex items-center justify-center mb-4 text-xl font-bold">🧹</div>
+                <h3 class="text-xl font-semibold mb-2">Čištění a zrychlení</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Kompletní přepastování procesoru, vyčištění od prachu a softwarová optimalizace OS.</p>
             </div>
-
-            <div class="card">
-                <h3>Upgrade SSD / RAM</h3>
-                <p>Zrychlení vašeho počítače nebo notebooku.</p>
-            </div>
-
-            <div class="card">
-                <h3>Čištění notebooků</h3>
-                <p>Vyčištění od prachu a výměna teplovodivé pasty.</p>
+            <div class="bg-gray-800/50 border border-gray-800 rounded-2xl p-6 hover:border-purple-500/50 transition duration-300">
+                <div class="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center mb-4 text-xl font-bold">🦠</div>
+                <h3 class="text-xl font-semibold mb-2">Odvirování a Software</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">Odstranění malware, instalace Windows/Linux a zálohování drahocenných dat.</p>
             </div>
         </div>
+    </section>
+
+    <div id="orderModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none modal">
+        <div class="bg-gray-800 border border-gray-700 rounded-2xl w-full max-w-md p-6 relative transform scale-95 transition-transform duration-300">
+            <button onclick="toggleModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-semibold">&times;</button>
+            
+            <h3 class="text-2xl font-bold mb-2 text-white">Nezávazná poptávka</h3>
+            <p class="text-gray-400 text-sm mb-6">Napište mi, co váš počítač trápí, a já se vám ozvu zpět.</p>
+            
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Jméno</label>
+                    <input type="text" class="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition" placeholder="Jan Novák">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">E-mail / Telefon</label>
+                    <input type="text" class="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition" placeholder="jan.novak@email.cz">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1">Popis závady</label>
+                    <textarea rows="3" class="w-full bg-gray-950 border border-gray-700 rounded-lg px-4 py-2.5 text-white focus:outline-none focus:border-blue-500 transition resize-none" placeholder="Např. notebook se přehřívá..."></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-lg transition shadow-lg shadow-blue-600/20 mt-2">
+                    Odeslat poptávku
+                </button>
+            </form>
+        </div>
     </div>
-</section>
 
-<section id="cenik" class="pricing">
-    <div class="container">
-        <h2>Ceník</h2>
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('orderModal');
+            const modalContent = modal.querySelector('div');
+            
+            // Kontrola, zda je okno skryté
+            if (modal.classList.contains('opacity-0')) {
+                // Zobrazit
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            } else {
+                // Skrýt
+                modal.classList.add('opacity-0', 'pointer-events-none');
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+            }
+        }
 
-        <table>
-            <tr>
-                <th>Služba</th>
-                <th>Cena od</th>
-            </tr>
-
-            <tr>
-                <td>Instalace Windows</td>
-                <td>700 Kč</td>
-            </tr>
-
-            <tr>
-                <td>Odstranění virů</td>
-                <td>500 Kč</td>
-            </tr>
-
-            <tr>
-                <td>Čištění notebooku</td>
-                <td>800 Kč</td>
-            </tr>
-
-            <tr>
-                <td>Výměna SSD</td>
-                <td>900 Kč</td>
-            </tr>
-
-            <tr>
-                <td>Diagnostika</td>
-                <td>300 Kč</td>
-            </tr>
-        </table>
-    </div>
-</section>
-
-<section id="kontakt" class="contact">
-    <div class="container">
-        <h2>Kontakt</h2>
-
-        <p>Telefon: +420 XXX XXX XXX</p>
-        <p>Email: info@dpcservis.cz</p>
-
-        <form>
-            <input type="text" placeholder="Jméno" required>
-            <input type="email" placeholder="E-mail" required>
-            <textarea placeholder="Popis problému"></textarea>
-            <button type="submit">Odeslat</button>
-        </form>
-    </div>
-</section>
-
-<footer>
-    <div class="container">
-        <p>© 2026 DPC Servis. Všechna práva vyhrazena.</p>
-    </div>
-</footer>
-
+        // Zavření okna kliknutím mimo něj
+        window.onclick = function(event) {
+            const modal = document.getElementById('orderModal');
+            if (event.target === modal) {
+                toggleModal();
+            }
+        }
+    </script>
 </body>
 </html>
