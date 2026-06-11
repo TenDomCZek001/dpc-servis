@@ -1,185 +1,43 @@
-<!DOCTYPE html>
-<html lang="cs" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPC Servis | Profesionální opravy PC a notebooků</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        /* Plynulé zobrazení modálu */
-        .modal-blur {
-            backdrop-filter: blur(0px);
-            transition: backdrop-filter 0.3s ease, bg-opacity 0.3s ease;
-        }
-        .modal-active .modal-blur {
-            backdrop-filter: blur(8px);
-        }
-        /* Jemný animovaný podtext pro tech atmosféru */
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.6; }
-        }
-        .tech-glow {
-            animation: pulseGlow 8s infinite ease-in-out;
-        }
-    </style>
-</head>
-<body id="domu" class="bg-[#0b0f19] text-gray-100 font-sans antialiased selection:bg-blue-500 selection:text-white overflow-x-hidden">
-
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none tech-glow"></div>
-    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none tech-glow" style="animation-delay: 4s;"></div>
-
-    <nav class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#0b0f19]/70 border-b border-gray-800/60 px-6 py-4 transition-all duration-300">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <a href="#domu" class="text-2xl font-black tracking-wider bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent hover:opacity-90 transition-opacity">
-                DPC SERVIS
-            </a>
+<section class="max-w-6xl mx-auto px-6 py-16 relative z-10">
+    <div class="bg-gradient-to-b from-gray-900/50 to-gray-900/20 border border-gray-800/60 rounded-3xl p-8 md:p-12 backdrop-blur-md">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-                <a href="#domu" class="hover:text-blue-400 transition-colors">Domů</a>
-                <a href="#sluzby" class="hover:text-blue-400 transition-colors">Služby</a>
-                <a href="#cenik" class="hover:text-blue-400 transition-colors">Ceník</a>
-                <button onclick="openModal()" class="hover:text-blue-400 transition-colors">Kontakt</button>
-            </div>
-            
-            <button onclick="openModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5">
-                Rychlá objednávka
-            </button>
-        </div>
-    </nav>
-
-    <header class="relative max-w-5xl mx-auto px-6 pt-24 pb-20 text-center z-10">
-        <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-full px-4 py-1.5 text-xs font-semibold text-blue-400 mb-6 tracking-wide uppercase">
-            ⚡ Rychlý a spolehlivý IT servis
-        </div>
-        <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight mb-6">
-            Opravy počítačů a notebooků <br>
-            <span class="bg-gradient-to-r from-blue-400 via-teal-400 to-indigo-400 bg-clip-text text-transparent">ve vašem městě</span>
-        </h1>
-        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Nenechte se brzdit nefunkční technikou. Nabízím profesionální diagnostiku, hardwarové opravy a softwarové vyčištění s jasným rozpočtem předem.
-        </p>
-        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <button onclick="openModal()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold text-base shadow-xl shadow-blue-600/20 transition-all duration-300 hover:-translate-y-1">
-                Objednat opravu online
-            </button>
-            <a href="#sluzby" class="w-full sm:w-auto text-center bg-gray-900/60 hover:bg-gray-800/80 border border-gray-800 px-8 py-4 rounded-xl font-semibold text-base transition-all duration-300">
-                Naše služby
-            </a>
-        </div>
-    </header>
-
-    <section id="sluzby" class="max-w-6xl mx-auto px-6 py-20 relative z-10 scroll-mt-24">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Naše profesionální služby</h2>
-            <p class="text-gray-400 max-w-xl mx-auto text-sm md:text-base">Ať už jde o stolní herní mašinu nebo pracovní ultrabook, vím přesně, kam sáhnout.</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="group bg-gray-900/40 border border-gray-800/80 rounded-2xl p-6 transition-all duration-300 hover:border-blue-500/40 hover:bg-gray-900/60 hover:shadow-2xl hover:shadow-blue-500/5">
-                <div class="w-12 h-12 bg-blue-500/10 text-blue-400 rounded-xl flex items-center justify-center mb-5 text-xl font-bold group-hover:scale-110 transition-transform">💻</div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-blue-400 transition-colors">Instalace Windows</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Čistá a rychlá instalace operačního systému včetně nejnovějších ovladačů a základního softwaru.</p>
-            </div>
-            <div class="group bg-gray-900/40 border border-gray-800/80 rounded-2xl p-6 transition-all duration-300 hover:border-teal-500/40 hover:bg-gray-900/60 hover:shadow-2xl hover:shadow-teal-500/5">
-                <div class="w-12 h-12 bg-teal-500/10 text-teal-400 rounded-xl flex items-center justify-center mb-5 text-xl font-bold group-hover:scale-110 transition-transform">🛡️</div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-teal-400 transition-colors">Odstranění virů</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Důkladná hloubková analýza, kompletní odstranění malware, spyware a zabezpečení systému proti budoucím hrozbám.</p>
-            </div>
-            <div class="group bg-gray-900/40 border border-gray-800/80 rounded-2xl p-6 transition-all duration-300 hover:border-indigo-500/40 hover:bg-gray-900/60 hover:shadow-2xl hover:shadow-indigo-500/5">
-                <div class="w-12 h-12 bg-indigo-500/10 text-indigo-400 rounded-xl flex items-center justify-center mb-5 text-xl font-bold group-hover:scale-110 transition-transform">🚀</div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-indigo-400 transition-colors">Upgrade SSD / RAM</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Radikální zrychlení staršího počítače výměnou disku za bleskové SSD nebo navýšením operační paměti RAM.</p>
-            </div>
-            <div class="group bg-gray-900/40 border border-gray-800/80 rounded-2xl p-6 transition-all duration-300 hover:border-purple-500/40 hover:bg-gray-900/60 hover:shadow-2xl hover:shadow-purple-500/5">
-                <div class="w-12 h-12 bg-purple-500/10 text-purple-400 rounded-xl flex items-center justify-center mb-5 text-xl font-bold group-hover:scale-110 transition-transform">🧹</div>
-                <h3 class="text-lg font-bold mb-2 group-hover:text-purple-400 transition-colors">Čištění notebooků</h3>
-                <p class="text-gray-400 text-sm leading-relaxed">Profesionální vyčištění vnitřního chlazení od prachu a nanesení špičkové teplovodivé pasty proti přehřívání.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="cenik" class="max-w-4xl mx-auto px-6 py-12 relative z-10 scroll-mt-24">
-        <div class="bg-gray-900/30 border border-gray-800 rounded-2xl p-8 backdrop-blur-sm">
-            <h3 class="text-xl font-bold mb-6 text-center">Orientační ceník nejčastějších úkonů</h3>
-            <div class="space-y-4 text-sm">
-                <div class="flex justify-between border-b border-gray-800 pb-2">
-                    <span class="text-gray-300">Diagnostika závady (v případě opravy zdarma)</span>
-                    <span class="font-semibold text-blue-400">od 350 Kč</span>
-                </div>
-                <div class="flex justify-between border-b border-gray-800 pb-2">
-                    <span class="text-gray-300">Čištění, přepastování a profylaxe chlazení</span>
-                    <span class="font-semibold text-blue-400">690 Kč</span>
-                </div>
-                <div class="flex justify-between border-b border-gray-800 pb-2">
-                    <span class="text-gray-300">Instalace OS Windows včetně ovladačů</span>
-                    <span class="font-semibold text-blue-400">890 Kč</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="border-t border-gray-900 mt-20 py-8 text-center text-xs text-gray-500">
-        © 2026 DPC Servis. Všechna práva vyhrazena. Hostováno na GitHub Pages.
-    </footer>
-
-    <div id="contactModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 opacity-0 pointer-events-none transition-all duration-300 modal-blur">
-        <div id="modalBox" class="bg-[#111625] border border-gray-800 rounded-2xl w-full max-w-md p-6 relative transform scale-95 translate-y-4 transition-all duration-300 shadow-2xl shadow-black/80">
-            
-            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl transition-colors">&times;</button>
-            
-            <h3 class="text-2xl font-bold mb-2 text-white flex items-center gap-2">
-                <span>✉️</span> Napište mi
-            </h3>
-            <p class="text-gray-400 text-xs mb-6">Odpovím vám hned, jak pustím páječku nebo šroubovák z ruky.</p>
-            
-            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Vaše jméno</label>
-                    <input type="text" required class="w-full bg-[#0b0f19] border border-gray-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 transition-colors" placeholder="Ing. Dominik ...">
+            <div class="flex gap-4 items-start">
+                <div class="p-3 bg-blue-500/10 rounded-xl text-blue-400 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                    </svg>
                 </div>
                 <div>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">E-mail nebo Telefon</label>
-                    <input type="text" required class="w-full bg-[#0b0f19] border border-gray-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 transition-colors" placeholder="příklad@email.cz / +420...">
+                    <h4 class="text-lg font-semibold mb-1 text-white">Bezpečí vašich dat</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Vaše soukromí je prioritou. Před každým zásahem dbám na bezpečné zálohování fotografií a dokumentů.</p>
+                </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+                <div class="p-3 bg-teal-500/10 rounded-xl text-teal-400 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125V18M3.75 18v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125V9.75M4.5 9.75h15" />
+                    </svg>
                 </div>
                 <div>
-                    <label class="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Co potřebujete opravit?</label>
-                    <textarea rows="3" required class="w-full bg-[#0b0f19] border border-gray-800 rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-blue-500 transition-colors resize-none" placeholder="Popište chování PC (přehřívá se, nenajíždí...)"></textarea>
+                    <h4 class="text-lg font-semibold mb-1 text-white">Transparentní cena</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Žádné překvapení. Po diagnostice vám zavolám přesnou cenu opravy a vy se rozhodnete, zda budeme pokračovat.</p>
                 </div>
-                <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3.5 rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/10 mt-2 text-sm">
-                    Odeslat nezávaznou poptávku
-                </button>
-            </form>
+            </div>
+
+            <div class="flex gap-4 items-start">
+                <div class="p-3 bg-purple-500/10 rounded-xl text-purple-400 shrink-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-1 text-white">Expresní vyřízení</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">Vím, že počítač potřebujete k práci nebo studiu. Většinu standardních servisů dokončuji do 24 až 48 hodin.</p>
+                </div>
+            </div>
+
         </div>
     </div>
-
-    <script>
-        const modal = document.getElementById('contactModal');
-        const modalBox = document.getElementById('modalBox');
-
-        function openModal() {
-            document.body.classList.add('modal-active', 'overflow-hidden');
-            modal.classList.remove('opacity-0', 'pointer-events-none');
-            modalBox.classList.remove('scale-95', 'translate-y-4');
-            modalBox.classList.add('scale-100', 'translate-y-0');
-        }
-
-        function closeModal() {
-            document.body.classList.remove('modal-active', 'overflow-hidden');
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modalBox.classList.remove('scale-100', 'translate-y-0');
-            modalBox.classList.add('scale-95', 'translate-y-4');
-        }
-
-        modal.addEventListener('click', function(e) {
-            if (e.target === modal) closeModal();
-        });
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            alert('Poptávka byla úspěšně simulována! Pro ostrý provoz formuláře na GitHub Pages doporučuji integrovat službu Formspree.io.');
-            closeModal();
-        }
-    </script>
-</body>
-</html>
+</section>
