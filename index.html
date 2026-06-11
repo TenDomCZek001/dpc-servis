@@ -1,255 +1,256 @@
 <!DOCTYPE html>
-<html lang="cs" class="scroll-smooth">
+<html lang="cs">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPC Servis | Hardwarový & Softwarový restart pro vaše PC</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>DPC Servis | Profesionální opravy PC</title>
     <style>
-        /* Animace pro boční plovoucí panel (Drawer) */
-        .drawer-backdrop {
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
-        .drawer-content {
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        body {
+            background-color: #0b0f19;
+            color: #f3f4f6;
+            font-family: sans-serif;
+            line-height: 1.6;
+        }
+        nav {
+            background-color: rgba(11, 15, 25, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1f2937;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+        .nav-links button {
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-weight: 600;
+            font-size: 14px;
+            margin-left: 30px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .nav-links button:hover {
+            color: #3b82f6;
+        }
+        
+        /* Hero sekce podle vašeho původního screenu */
+        .hero {
+            background: linear-gradient(180deg, #1e40af 0%, #0b0f19 100%);
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .hero p {
+            color: #cbd5e1;
+            font-size: 18px;
+            margin-bottom: 30px;
+        }
+        .btn-primary {
+            background-color: #3b82f6;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #2563eb;
+        }
+
+        /* Sekce společné styly */
+        .section-container {
+            max-w: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 50px;
+        }
+
+        /* O mně sekce */
+        .about-box {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .about-title {
+            font-size: 24px;
+            color: #3b82f6;
+            font-weight: 700;
+        }
+        .about-text p {
+            color: #9ca3af;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .about-text strong {
+            color: #fff;
+        }
+
+        /* Grid pro služby a ceník ve vašem původním stylu */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            border-radius: 12px;
+            padding: 30px;
+            transition: border-color 0.2s;
+        }
+        .card:hover {
+            border-color: #3b82f6;
+        }
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        .card .price {
+            font-size: 28px;
+            font-weight: 800;
+            color: #3b82f6;
+            margin: 15px 0;
+        }
+        .card p {
+            color: #9ca3af;
+            font-size: 14px;
+        }
+
+        /* Plovoucí okno (Modál) */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            z-index: 200;
+        }
+        .modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-content {
+            background-color: #111827;
+            border: 1px solid #1f2937;
+            padding: 40px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 450px;
+            position: relative;
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px; right: 20px;
+            background: none; border: none;
+            color: #9ca3af; font-size: 28px; cursor: pointer;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            background-color: #0b0f19;
+            border: 1px solid #1f2937;
+            padding: 12px;
+            color: white;
+            border-radius: 8px;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #3b82f6;
+            outline: none;
         }
     </style>
 </head>
-<body id="domu" class="bg-[#fcfbfa] text-[#1a1919] font-sans antialiased selection:bg-blue-600 selection:text-white">
+<body>
 
-    <nav class="sticky top-0 z-40 w-full bg-[#fcfbfa]/80 backdrop-blur-md border-b-2 border-black px-6 py-4">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <button onclick="scrollToSection('domu')" class="text-xl font-black uppercase tracking-wider border-2 border-black bg-white px-3 py-1 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                DPC // SERVIS
-            </button>
-            
-            <div class="hidden md:flex items-center gap-6 text-sm font-bold uppercase tracking-tight">
-                <button onclick="scrollToSection('domu')" class="hover:text-blue-600 transition-colors">Domů</button>
-                <button onclick="scrollToSection('o-mne')" class="hover:text-blue-600 transition-colors">O mně</button>
-                <button onclick="scrollToSection('bento-obsah')" class="hover:text-blue-600 transition-colors">Služby & Ceník</button>
-                <button onclick="openDrawer()" class="hover:text-blue-600 transition-colors">Kontakt</button>
-            </div>
-            
-            <button onclick="openDrawer()" class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-black uppercase tracking-widest border-2 border-black px-5 py-2.5 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[3px] hover:translate-y-[3px] hover:shadow-none transition-all">
-                Vyřešit problém
-            </button>
+    <nav>
+        <div class="logo">DPC Servis</div>
+        <div class="nav-links">
+            <button onclick="scrollToSection('domu')">Domů</button>
+            <button onclick="scrollToSection('o-mne')">O mně</button>
+            <button onclick="scrollToSection('sluzby')">Služby</button>
+            <button onclick="scrollToSection('cenik')">Ceník</button>
+            <button onclick="openModal()">Kontakt</button>
         </div>
     </nav>
 
-    <header class="max-w-6xl mx-auto px-6 pt-16 pb-12 text-center md:text-left md:flex items-center justify-between gap-12">
-        <div class="max-w-2xl mb-8 md:mb-0">
-            <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-none mb-6 uppercase">
-                Vracím počítačům <br>
-                <span class="bg-blue-600 text-white px-3 py-1 inline-block my-1 transform -rotate-1">původní sílu.</span>
-            </h1>
-            <p class="text-gray-600 text-lg font-medium leading-relaxed max-w-xl">
-                Profesionální diagnostika, bleskový upgrade a nekompromisní čištění hardwaru. Žádná korporátní omáčka, prostě opravené PC.
-            </p>
-        </div>
-        <div class="flex flex-col gap-3 w-full md:w-auto shrink-0">
-            <button onclick="openDrawer()" class="w-full md:w-64 text-center bg-black hover:bg-gray-800 text-white font-bold uppercase tracking-wide py-4 border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
-                Rychlá objednávka online
-            </button>
-            <button onclick="scrollToSection('bento-obsah')" class="w-full md:w-64 text-center bg-white hover:bg-gray-50 text-black font-bold uppercase tracking-wide py-4 border-2 border-black transition-all">
-                Ukázat služby a ceny
-            </button>
-        </div>
+    <header class="hero">
+        <h1>Opravy počítačů a notebooků</h1>
+        <p>Rychle, spolehlivě a za rozumnou cenu.</p>
+        <button onclick="openModal()" class="btn-primary">Kontaktovat</button>
     </header>
 
-    <section id="o-mne" class="max-w-6xl mx-auto px-6 py-8 scroll-mt-24">
-        <div class="bg-white border-2 border-black p-8 md:p-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-            <div class="md:col-span-2">
-                <div class="inline-block bg-blue-100 text-blue-800 text-[10px] font-black uppercase tracking-wider px-2.5 py-1 border border-black mb-4">
-                    Kdo se postará o váš stroj?
-                </div>
-                <h2 class="text-3xl font-black uppercase mb-4">Ahoj, já jsem Dominik</h2>
-                <div class="space-y-4 text-gray-600 text-sm md:text-base leading-relaxed">
-                    <p>
-                        Je mi 27 let, mám vystudovaný obor <strong class="text-black font-bold">IT technik</strong> a výpočetní technika je mým životem už <strong class="text-blue-600 font-bold">přes 15 let</strong>. Všechno to začalo zhruba ve dvanácti, kdy jsem poprvé rozebral rodinné PC (a k překvapení všech ho zase složil a zrychlil). Co tehdy začalo jako zvědavost a čistá vášeň, to se postupně proměnilo v profesionální řemeslo.
-                    </p>
-                    <p>
-                        Díky kombinaci oficiálního IT vzdělání a letitých praktických zkušeností mě dnes málokterá závada překvapí. Nezáleží na tom, jestli potřebujete zachránit data ze starého disku, postavit nekompromisní herní mašinu, nebo vyčistit přehřívající se notebook – ke každému stroji přistupuji tak, jako by byl můj vlastní. Žádný zmatečný technický žargon, ale rychlé, férové a spolehlivé řešení.
-                    </p>
-                </div>
-            </div>
-            <div class="bg-slate-50 border-2 border-black p-6 space-y-4 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                <h4 class="font-black uppercase tracking-wide text-xs border-b border-black pb-2 text-blue-600">Dominikův profil</h4>
-                <div class="text-xs space-y-2">
-                    <p><strong class="uppercase text-gray-500 block">Věk:</strong> <span class="font-bold text-sm">27 let</span></p>
-                    <p><strong class="uppercase text-gray-500 block">Vzdělání:</strong> <span class="font-bold text-sm">Certifikovaný IT technik</span></p>
-                    <p><strong class="uppercase text-gray-500 block">Praxe v oboru:</strong> <span class="font-bold text-sm">Od roku 2011 (od 12 let)</span></p>
-                    <p><strong class="uppercase text-gray-500 block">Hlavní zásada:</strong> <span class="font-bold text-sm text-emerald-600">Bezpečnost dat na 1. místě</span></p>
-                </div>
+    <section id="o-mne" class="section-container">
+        <h2 class="section-title">O mně</h2>
+        <div class="about-box">
+            <h3 class="about-title">IT Technik Dominik</h3>
+            <div class="about-text">
+                <p>Je mi <strong>27 let</strong> a mám úspěšně vystudovaný obor <strong>IT technik</strong>. V tomto dynamickém odvětví se aktivně pohybuji již <strong>od svých 12 let</strong>, kdy mě fascinoval svět hardwaru a operačních systémů.</p>
+                <p>Co začalo jako koníček a dětská zvědavost, se postupem let změnilo v profesionální řemeslo. Díky patnáctileté praxi a technickému vzdělání dokážu rychle diagnostikovat softwarové i hardwarové závady a navrhnout nejefektivnější řešení bez zbytečného odkladu.</p>
+                <p>Při každé opravě se plně soustředím na <strong>maximální bezpečnost vašich osobních dat</strong> a transparentní přístup k ceně.</p>
             </div>
         </div>
     </section>
 
-    <main id="bento-obsah" class="max-w-6xl mx-auto px-6 py-8 scroll-mt-24">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="md:col-span-2 bg-white border-2 border-black p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="bg-teal-100 text-teal-800 text-xs font-black uppercase px-2.5 py-1 border border-black">🔥 Nejžádanější úkon</span>
-                        <span class="text-2xl font-black">690 Kč</span>
-                    </div>
-                    <h3 class="text-2xl font-black uppercase mb-2">Kompletní profylaxe & přepastování</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed mb-6">
-                        Hučí váš počítač nebo se vypíná při zátěži? Provedu kompletní rozebrání, vyčištění chlazení od prachu, promazání ventilátorů a nanesení špičkové teplovodivé pasty na procesor a grafický čip. Snížení teplot až o 20 °C zaručeno.
-                    </p>
-                </div>
-                <button onclick="openDrawer()" class="w-full md:w-auto self-start bg-blue-600 hover:bg-blue-700 text-white font-bold uppercase text-xs tracking-wider px-6 py-3 border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
-                    Objednat vyčištění
-                </button>
+    <section id="sluzby" class="section-container">
+        <h2 class="section-title">Naše služby</h2>
+        <div class="grid-container">
+            <div class="card">
+                <h3>Instalace Windows</h3>
+                <p>Čistá instalace systému a základní nastavení pro hladký chod.</p>
             </div>
-
-            <div class="bg-white border-2 border-black p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-bold uppercase text-gray-400">HW / SW Test</span>
-                        <span class="text-xl font-black">350 Kč</span>
-                    </div>
-                    <h3 class="text-xl font-black uppercase mb-2">Diagnostika</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Přesné zjištění závady komponentů. Pokud se rozhodnete nechat PC opravit u mě, je diagnostika <b>ZDARMA</b>.
-                    </p>
-                </div>
-                <button onclick="openDrawer()" class="w-full bg-black text-white font-bold uppercase text-xs py-3 mt-6">Zjistit závadu</button>
+            <div class="card">
+                <h3>Odstranění virů</h3>
+                <p>Vyčištění operačního systému a celkové zabezpečení počítače.</p>
             </div>
-
-            <div class="bg-white border-2 border-black p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-                <div>
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-bold uppercase text-gray-400">Software</span>
-                        <span class="text-xl font-black">890 Kč</span>
-                    </div>
-                    <h3 class="text-xl font-black uppercase mb-2">Reinstalace OS</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Čistá instalace Windows 10/11, nahrání nejnovějších ovladačů, základního softwaru a kompletní záloha vašich původních dat.
-                    </p>
-                </div>
-                <button onclick="openDrawer()" class="w-full bg-black text-white font-bold uppercase text-xs py-3 mt-6">Instalovat</button>
+            <div class="card">
+                <h3>Upgrade SSD / RAM</h3>
+                <p>Radikální zrychlení vašeho staršího počítače nebo notebooku.</p>
             </div>
-
-            <div class="md:col-span-2 bg-white border-2 border-black p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
-                <h3 class="text-xl font-black uppercase mb-4 border-b-2 border-black pb-2">Doplňkové servisní úkony</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-medium">
-                    <div class="flex justify-between border-b border-gray-100 pb-2">
-                        <span class="text-gray-600">Odvirování a zrychlení chodu</span>
-                        <span class="font-bold">590 Kč</span>
-                    </div>
-                    <div class="flex justify-between border-b border-gray-100 pb-2">
-                        <span class="text-gray-600">Montáž komponentu (RAM, GPU)</span>
-                        <span class="font-bold">390 Kč</span>
-                    </div>
-                    <div class="flex justify-between border-b border-gray-100 pb-2">
-                        <span class="text-gray-600">Výměna displeje notebooku</span>
-                        <span class="font-bold">790 Kč <span class="text-[10px] font-normal text-gray-400">+ díl</span></span>
-                    </div>
-                    <div class="flex justify-between border-b border-gray-100 pb-2">
-                        <span class="text-gray-600">Stavba herního PC z dílů</span>
-                        <span class="font-bold">1 490 Kč</span>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </main>
-
-    <footer class="bg-black text-white mt-24 py-12 text-xs">
-        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-6">
-            <div>
-                <p class="font-black text-sm uppercase tracking-wider mb-1">DPC SERVIS</p>
-                <p class="text-gray-400">Profesionální opravy výpočetní techniky pod vedením experta.</p>
-            </div>
-            <div class="text-center sm:text-right text-gray-500">
-                <p>© 2026 DPC Servis. Všechna práva vyhrazena.</p>
-                <p class="mt-1">Hostováno na spolehlivém GitHub Pages.</p>
-            </div>
-        </div>
-    </footer>
-
-    <div id="contactDrawer" class="fixed inset-0 z-50 opacity-0 pointer-events-none invisible transition-all duration-300 drawer-backdrop bg-black/40 backdrop-blur-sm">
-        
-        <div id="drawerBox" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white border-l-4 border-black p-6 shadow-2xl transform translate-x-full drawer-content flex flex-col justify-between">
-            <div>
-                <div class="flex justify-between items-center border-b-2 border-black pb-4 mb-6">
-                    <h3 class="text-xl font-black uppercase">Nová poptávka</h3>
-                    <button onclick="closeDrawer()" class="text-black hover:text-red-600 text-3xl font-bold transition-colors">&times;</button>
-                </div>
-                
-                <form onsubmit="handleFormSubmit(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-black uppercase tracking-wider mb-1">Vaše jméno</label>
-                        <input type="text" required class="w-full bg-gray-50 border-2 border-black p-3 text-sm focus:outline-none focus:bg-white transition-all" placeholder="Jméno a příjmení">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-black uppercase tracking-wider mb-1">E-mail / Telefon</label>
-                        <input type="text" required class="w-full bg-gray-50 border-2 border-black p-3 text-sm focus:outline-none focus:bg-white transition-all" placeholder="např. jmeno@email.cz">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-black uppercase tracking-wider mb-1">Popis závady zařízení</label>
-                        <textarea rows="4" required class="w-full bg-gray-50 border-2 border-black p-3 text-sm focus:outline-none focus:bg-white transition-all resize-none" placeholder="Co přesně počítač dělá? (přehřívá se, nenajíždí obraz...)"></textarea>
-                    </div>
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black uppercase tracking-wide py-4 border-2 border-black shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all mt-4">
-                        Odeslat do servisu
-                    </button>
-                </form>
-            </div>
-            
-            <div class="text-[11px] text-gray-400 text-center border-t border-gray-100 pt-4">
-                Odpovím vám v nejkratším možném čase.
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                const offset = 90; 
-                const bodyRect = document.body.getBoundingClientRect().top;
-                const elementRect = element.getBoundingClientRect().top;
-                const elementPosition = elementRect - bodyRect;
-                const offsetPosition = elementPosition - offset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        const drawer = document.getElementById('contactDrawer');
-        const drawerBox = document.getElementById('drawerBox');
-
-        function openDrawer() {
-            document.body.classList.add('overflow-hidden');
-            drawer.classList.remove('opacity-0', 'pointer-events-none', 'invisible');
-            setTimeout(() => {
-                drawerBox.classList.remove('translate-x-full');
-                drawerBox.classList.add('translate-x-0');
-            }, 10);
-        }
-
-        function closeDrawer() {
-            document.body.classList.remove('overflow-hidden');
-            drawerBox.classList.remove('translate-x-0');
-            drawerBox.classList.add('translate-x-full');
-            setTimeout(() => {
-                drawer.classList.add('opacity-0', 'pointer-events-none', 'invisible');
-            }, 300);
-        }
-
-        drawer.addEventListener('click', function(e) {
-            if (e.target === drawer) closeDrawer();
-        });
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            alert('Poptávka byla úspěšně odeslána! Dominik se vám brzy ozve.');
-            closeDrawer();
-        }
-    </script>
-</body>
-</html>
+            <div class="card">
+                <h3>Čištění notebooků</h3>
+                <p>Důkladné odstranění prachu z chlazení a výměna teplovodivé pasty
