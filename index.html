@@ -3,420 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPC Servis | Profesionální opravy PC</title>
+    <title>DPC Servis | Hardwarový & Softwarový servis</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         body {
-            background-color: #0b0f19;
-            color: #f3f4f6;
-            font-family: sans-serif;
-            line-height: 1.6;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.5;
         }
+        
+        /* Navigace přesně podle vašeho obrázku */
         nav {
-            background-color: rgba(11, 15, 25, 0.85);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid #1f2937;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            padding: 20px 40px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 20px 80px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .logo {
-            font-size: 24px;
+        .logo-box {
+            border: 3px solid #000000;
+            padding: 8px 20px;
+            font-size: 22px;
             font-weight: 900;
             letter-spacing: 1px;
-            color: #fff;
+            color: #000000;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
         .nav-links button {
             background: none;
             border: none;
-            color: #9ca3af;
-            font-weight: 600;
+            color: #000000;
+            font-weight: 700;
             font-size: 14px;
-            margin-left: 30px;
             cursor: pointer;
-            transition: color 0.2s;
         }
-        .nav-links button:hover {
-            color: #3b82f6;
+        .btn-header {
+            background-color: #2563eb;
+            color: #ffffff !important;
+            border: 3px solid #000000 !important;
+            padding: 10px 24px;
+            font-weight: 800 !important;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            box-shadow: 3px 3px 0px #000000;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
         }
-        
-        /* Přesný modrý gradient z vašeho screenu */
+        .btn-header:hover {
+            transform: translate(-1px, -1px);
+            box-shadow: 4px 4px 0px #000000;
+        }
+        .btn-header:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 1px 0px #000000;
+        }
+
+        /* Hero sekce s obrovským textem */
         .hero {
-            background: linear-gradient(180deg, #1d4ed8 0%, #0b0f19 100%);
-            text-align: center;
-            padding: 120px 20px;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 100px 80px;
         }
         .hero h1 {
-            font-size: 44px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: #fff;
-            letter-spacing: -0.5px;
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1.1;
+            color: #1a1a1a;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+        }
+        .hero h1 span {
+            background-color: #2563eb;
+            color: #ffffff;
+            padding: 0px 15px;
+            display: inline-block;
         }
         .hero p {
-            color: #cbd5e1;
-            font-size: 16px;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        .btn-primary {
-            background-color: #3b82f6;
-            color: white;
-            padding: 12px 28px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 14px;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.2s, transform 0.1s;
-        }
-        .btn-primary:hover {
-            background-color: #2563eb;
-        }
-        .btn-primary:active {
-            transform: scale(0.98);
-        }
-        .btn-primary:disabled {
-            background-color: #4b5563;
-            cursor: not-allowed;
-        }
-
-        .section-container {
-            max-w: 1100px;
-            margin: 0 auto;
-            padding: 60px 20px;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 40px;
-            color: #fff;
-        }
-
-        /* Sekce o mně upravená do tmavého stylu */
-        .about-box {
-            background-color: rgba(17, 24, 39, 0.6);
-            border: 1px solid #1f2937;
-            border-radius: 8px;
-            padding: 35px;
-        }
-        .about-title {
-            font-size: 20px;
-            color: #3b82f6;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        .about-text p {
-            color: #9ca3af;
-            margin-bottom: 15px;
-            font-size: 15px;
-        }
-        .about-text strong {
-            color: #fff;
-        }
-
-        /* Přesný styl karet podle vašeho prvního obrázku */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-        }
-        .card {
-            background-color: rgba(17, 24, 39, 0.6);
-            border: 1px solid #1f2937;
-            border-radius: 8px;
-            padding: 24px;
-            transition: border-color 0.2s;
-        }
-        .card:hover {
-            border-color: #3b82f6;
-        }
-        .card h3 {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-        .card .price {
-            font-size: 26px;
-            font-weight: 800;
-            color: #3b82f6;
-            margin: 10px 0;
-        }
-        .card p {
-            color: #9ca3af;
-            font-size: 13px;
-            line-height: 1.5;
-        }
-
-        /* Plovoucí okno (Modál) */
-        .modal {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-color: rgba(0, 0, 0, 0.75);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
-            z-index: 200;
-            padding: 15px;
-        }
-        .modal.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        .modal-content {
-            background-color: #111827;
-            border: 1px solid #1f2937;
-            padding: 35px;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 440px;
-            position: relative;
-        }
-        .close-btn {
-            position: absolute;
-            top: 15px; right: 20px;
-            background: none; border: none;
-            color: #9ca3af; font-size: 24px; cursor: pointer;
-        }
-        .form-group {
-            margin-bottom: 18px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 11px;
-            text-transform: uppercase;
-            color: #9ca3af;
-            margin-bottom: 6px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            background-color: #0b0f19;
-            border: 1px solid #1f2937;
-            padding: 12px;
-            color: white;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: #3b82f6;
-            outline: none;
-        }
-        
-        /* Moderní stavové hlášky formuláře */
-        .status-msg {
-            padding: 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: none;
-        }
-        .status-msg.success {
-            display: block;
-            background-color: rgba(16, 185, 129, 0.15);
-            color: #10b981;
-            border: 1px solid rgba(16, 185, 129, 0.3);
-        }
-        .status-msg.error {
-            display: block;
-            background-color: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-    </style>
-</head>
-<body>
-
-    <nav>
-        <div class="logo">DPC Servis</div>
-        <div class="nav-links">
-            <button onclick="scrollToSection('domu')">Domů</button>
-            <button onclick="scrollToSection('o-mne')">O mně</button>
-            <button onclick="scrollToSection('sluzby')">Služby</button>
-            <button onclick="scrollToSection('cenik')">Ceník</button>
-            <button onclick="openModal()">Kontakt</button>
-        </div>
-    </nav>
-
-    <header class="hero" id="domu">
-        <h1>Opravy počítačů a notebooků</h1>
-        <p>Rychle, spolehlivě a za rozumnou cenu.</p>
-        <button onclick="openModal()" class="btn-primary">Kontaktovat</button>
-    </header>
-
-    <section id="o-mne" class="section-container">
-        <h2 class="section-title">O mně</h2>
-        <div class="about-box">
-            <h3 class="about-title">IT Technik Dominik</h3>
-            <div class="about-text">
-                <p>Je mi <strong>27 let</strong> a mám úspěšně vystudovaný obor <strong>IT technik</strong>. V tomto dynamickém odvětví se aktivně pohybuji již <strong>od svých 12 let</strong>, kdy mě fascinoval svět hardwaru a operačních systémů.</p>
-                <p>Co začalo jako koníček a dětská zvědavost, se postupem let změnilo v profesionální řemeslo. Díky patnáctileté praxi a technickému vzdělání dokážu rychle diagnostikovat softwarové i hardwarové závady a navrhnout nejefektivnější řešení bez zbytečného odkladu.</p>
-                <p>Při každé opravě se plně soustředím na <strong>maximální bezpečnost vašich osobních dat</strong> a transparentní přístup k ceně.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="sluzby" class="section-container">
-        <h2 class="section-title">Naše služby</h2>
-        <div class="grid-container">
-            <div class="card">
-                <h3>Instalace Windows</h3>
-                <p>Čistá instalace systému a základní nastavení pro hladký chod.</p>
-            </div>
-            <div class="card">
-                <h3>Odstranění virů</h3>
-                <p>Vyčištění operačního systému a celkové zabezpečení počítače.</p>
-            </div>
-            <div class="card">
-                <h3>Upgrade SSD / RAM</h3>
-                <p>Radikální zrychlení vašeho staršího počítače nebo notebooku.</p>
-            </div>
-            <div class="card">
-                <h3>Čištění notebooků</h3>
-                <p>Důkladné odstranění prachu z chlazení a výměna teplovodivé pasty.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="cenik" class="section-container">
-        <h2 class="section-title">Ceník služeb</h2>
-        <div class="grid-container">
-            <div class="card">
-                <h3>Diagnostika závady</h3>
-                <div class="price">350 Kč</div>
-                <p>Kompletní otestování hardwaru. V případě následné realizace opravy je diagnostika <b>ZDARMA</b>.</p>
-            </div>
-            <div class="card">
-                <h3>Čištění & Profylaxe</h3>
-                <div class="price">690 Kč</div>
-                <p>Fyzické vyčištění komponentů od prachu, promazání ventilátorů a nanesení nové pasty na procesor.</p>
-            </div>
-            <div class="card">
-                <h3>Instalace OS Windows</h3>
-                <div class="price">890 Kč</div>
-                <p>Nová instalace včetně nahrání všech chybějících ovladačů pro plnou stabilitu.</p>
-            </div>
-        </div>
-    </section>
-
-    <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">&times;</button>
-            <h3 style="margin-bottom: 20px; font-size: 20px; color: #fff; font-weight: 700;">Nezávazná poptávka</h3>
-            
-            <div id="statusMessage" class="status-msg"></div>
-
-            <form id="orderForm" onsubmit="handleFormSubmit(event)">
-                <div class="form-group">
-                    <label>Vaše jméno</label>
-                    <input type="text" id="formJmeno" required placeholder="Napište své jméno">
-                </div>
-                <div class="form-group">
-                    <label>E-mail / Telefon</label>
-                    <input type="text" id="formKontakt" required placeholder="jmeno@email.cz nebo telefon">
-                </div>
-                <div class="form-group">
-                    <label>Popis závady počítače</label>
-                    <textarea id="formZavada" rows="4" required placeholder="Co počítač dělá / co potřebujete opravit?"></textarea>
-                </div>
-                <button type="submit" id="submitBtn" class="btn-primary" style="width: 100%;">Odeslat poptávku</button>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // Propojení s vaším konkrétním Supabase projektem
-        const SUPABASE_URL = "https://qneewzmyvwvfktpzrvrd.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_pJ8fne2TdHw0y1lKCID-cA_gx7JOZDm";
-
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        function scrollToSection(sectionId) {
-            const element = document.getElementById(sectionId);
-            if (element) {
-                const offset = 80; 
-                const bodyRect = document.body.getBoundingClientRect().top;
-                const elementRect = element.getBoundingClientRect().top;
-                const elementPosition = elementRect - bodyRect;
-                const offsetPosition = elementPosition - offset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        }
-
-        const modal = document.getElementById('contactModal');
-        const form = document.getElementById('orderForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const statusMsg = document.getElementById('statusMessage');
-
-        function openModal() {
-            modal.classList.add('active');
-            statusMsg.className = "status-msg";
-            form.style.display = "block";
-        }
-
-        function closeModal() {
-            modal.classList.remove('active');
-        }
-
-        window.addEventListener('click', function(e) {
-            if (e.target === modal) closeModal();
-        });
-
-        async function handleFormSubmit(e) {
-            e.preventDefault();
-            
-            submitBtn.disabled = true;
-            submitBtn.innerText = "Odesílám...";
-
-            const jmeno = document.getElementById('formJmeno').value;
-            const kontakt = document.getElementById('formKontakt').value;
-            const zavada = document.getElementById('formZavada').value;
-
-            try {
-                const { data, error } = await _supabase
-                    .from('objednavky')
-                    .insert([
-                        { jmeno: jmeno, kontakt: kontakt, zavada: zavada }
-                    ]);
-
-                if (error) throw error;
-
-                statusMsg.innerText = "✓ Skvělé! Objednávka byla zapsána do databáze. Brzy se vám ozvu.";
-                statusMsg.className = "status-msg success";
-                form.reset();
-                form.style.display = "none";
-
-                setTimeout(closeModal, 3000);
-
-            } catch (error) {
-                console.error(error);
-                statusMsg.innerText = "❌ Chyba databáze: " + error.message;
-                statusMsg.className = "status-msg error";
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = "Odeslat poptávku";
-            }
-        }
-    </script>
-</body>
-</html>
+            color: #4b5563;
+            font-size: 18px;
+            font-weight: 500;
+            max-width: 60
