@@ -3,46 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPC Servis | Profesionální opravy PC a notebooků</title>
+    <title>DPC Servis | Profesionální IT podpora a opravy počítačů</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Plynulé zobrazení modálu */
-        .modal-blur {
-            backdrop-filter: blur(0px);
-            transition: backdrop-filter 0.3s ease, bg-opacity 0.3s ease;
+        /* Hladké zobrazení plovoucího okna */
+        .modal-backdrop {
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .modal-active .modal-blur {
-            backdrop-filter: blur(8px);
-        }
-        @keyframes pulseGlow {
-            0%, 100% { opacity: 0.4; }
-            50% { opacity: 0.6; }
-        }
-        .tech-glow {
-            animation: pulseGlow 8s infinite ease-in-out;
+        .modal-box {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
         }
     </style>
 </head>
-<body id="domu" class="bg-[#0b0f19] text-gray-100 font-sans antialiased selection:bg-blue-500 selection:text-white overflow-x-hidden">
+<body id="domu" class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-blue-600 selection:text-white">
 
-    <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none tech-glow"></div>
-    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none tech-glow" style="animation-delay: 4s;"></div>
-
-    <nav class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#0b0f19]/70 border-b border-gray-800/60 px-6 py-4 transition-all duration-300">
+    <nav class="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm px-6 py-4">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <button onclick="scrollToSection('domu')" class="text-2xl font-black tracking-wider bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent hover:opacity-90 transition-opacity">
-                DPC SERVIS
+            <button onclick="scrollToSection('domu')" class="text-xl font-extrabold tracking-tight text-slate-900 hover:text-blue-600 transition-colors">
+                DPC<span class="text-blue-600">SERVIS</span>
             </button>
             
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
-                <button onclick="scrollToSection('domu')" class="hover:text-blue-400 transition-colors">Domů</button>
-                <button onclick="scrollToSection('sluzby')" class="hover:text-blue-400 transition-colors">Služby</button>
-                <button onclick="scrollToSection('cenik')" class="hover:text-blue-400 transition-colors">Ceník</button>
-                <button onclick="openModal()" class="hover:text-blue-400 transition-colors">Kontakt</button>
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-600">
+                <button onclick="scrollToSection('domu')" class="hover:text-blue-600 transition-colors">Domů</button>
+                <button onclick="scrollToSection('sluzby')" class="hover:text-blue-600 transition-colors">Služby</button>
+                <button onclick="scrollToSection('cenik')" class="hover:text-blue-600 transition-colors">Ceník</button>
+                <button onclick="openModal()" class="hover:text-blue-600 transition-colors">Kontakt</button>
             </div>
             
-            <button onclick="openModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5">
-                Rychlá objednávka
+            <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-5 py-2.5 rounded-lg transition-all shadow-sm shadow-blue-600/10 hover:shadow-blue-600/20">
+                Nezávazná poptávka
             </button>
         </div>
     </nav>
+
+    <header class="max-w-6xl mx-auto px-6 pt-20 pb-16 md:pt-32 md:pb-24 text-center relative">
+        <div class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 rounded-full px-4 py-1 text-xs font-bold text-blue-700 mb-6 tracking-wide uppercase">
+            Služby pro firmy i jednotlivce
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-none mb-6">
+            Rychlý servis počítačů <br class="hidden md:inline">
+            <span class="text-blue-600">bez starostí a skrytých poplatků.</span>
+        </h1>
+        <p class="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+            Nefunguje vám PC tak, jak by mělo? Nabízím profesionální diagnostiku, čištění, hardwarové opravy a reinstalace systémů s garantovaným bezpečím pro vaše data.
+        </p>
+        <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <button onclick="openModal()" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold text-base transition shadow-md shadow-blue-600/10">
+                Objednat opravu online
+            </button
