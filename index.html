@@ -1,32 +1,48 @@
-<section id="cenik" class="max-w-6xl mx-auto px-6 py-24 relative z-10 scroll-mt-24">
-    
-    <div class="text-center mb-16">
-        <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 rounded-full px-4 py-1.5 text-xs font-semibold text-blue-400 mb-4 tracking-wide uppercase">
-            💰 Transparentní ceny
-        </div>
-        <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight mb-4">Ceník servisních služeb</h2>
-        <p class="text-gray-400 max-w-xl mx-auto text-sm md:text-base">
-            Uvedené ceny jsou konečné za práci. Cenu náhradních dílů s vámi vždy zkonzultuji předem.
-        </p>
-    </div>
+<!DOCTYPE html>
+<html lang="cs" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPC Servis | Profesionální opravy PC a notebooků</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Plynulé zobrazení modálu */
+        .modal-blur {
+            backdrop-filter: blur(0px);
+            transition: backdrop-filter 0.3s ease, bg-opacity 0.3s ease;
+        }
+        .modal-active .modal-blur {
+            backdrop-filter: blur(8px);
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.6; }
+        }
+        .tech-glow {
+            animation: pulseGlow 8s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body id="domu" class="bg-[#0b0f19] text-gray-100 font-sans antialiased selection:bg-blue-500 selection:text-white overflow-x-hidden">
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        
-        <div class="bg-gray-950/40 border border-gray-800/80 rounded-3xl p-8 backdrop-blur-sm relative flex flex-col justify-between transition-all duration-300 hover:border-gray-700">
-            <div>
-                <h3 class="text-xl font-bold text-white mb-2">Diagnostika</h3>
-                <p class="text-gray-400 text-xs mb-6">Zjištění závady a návrh nejlepšího řešení.</p>
-                <div class="text-3xl font-black text-white mb-6">350 Kč <span class="text-xs font-normal text-gray-500">/ úkon</span></div>
-                
-                <ul class="space-y-3 text-sm text-gray-300 border-t border-gray-800/60 pt-6">
-                    <li class="flex items-center gap-2 text-emerald-400">⚡ V případě následné opravy <b>ZDARMA</b></li>
-                    <li class="flex items-center gap-2">✓ HW testy komponentů</li>
-                    <li class="flex items-center gap-2">✓ Kontrola teplot a stability</li>
-                </ul>
+    <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[120px] pointer-events-none tech-glow"></div>
+    <div class="absolute top-1/3 right-1/4 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none tech-glow" style="animation-delay: 4s;"></div>
+
+    <nav class="sticky top-0 z-40 w-full backdrop-blur-md bg-[#0b0f19]/70 border-b border-gray-800/60 px-6 py-4 transition-all duration-300">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <button onclick="scrollToSection('domu')" class="text-2xl font-black tracking-wider bg-gradient-to-r from-blue-400 via-indigo-400 to-purple-500 bg-clip-text text-transparent hover:opacity-90 transition-opacity">
+                DPC SERVIS
+            </button>
+            
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-400">
+                <button onclick="scrollToSection('domu')" class="hover:text-blue-400 transition-colors">Domů</button>
+                <button onclick="scrollToSection('sluzby')" class="hover:text-blue-400 transition-colors">Služby</button>
+                <button onclick="scrollToSection('cenik')" class="hover:text-blue-400 transition-colors">Ceník</button>
+                <button onclick="openModal()" class="hover:text-blue-400 transition-colors">Kontakt</button>
             </div>
-            <button onclick="openModal()" class="w-full mt-8 bg-gray-900 hover:bg-gray-800 border border-gray-700 text-white font-medium py-3 rounded-xl transition">
-                Objednat diagnostiku
+            
+            <button onclick="openModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 hover:-translate-y-0.5">
+                Rychlá objednávka
             </button>
         </div>
-
-        <div class="bg-gradient-to-b
+    </nav>
